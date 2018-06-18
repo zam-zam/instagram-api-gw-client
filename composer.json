@@ -1,0 +1,14 @@
+{
+    "name": "zam-zam/instagram-api-gw-client",
+    "description": "Package for using with custom Instagram Api Gateway server",
+    "license": "MIT",
+    "authors": [ { "name": "zam-zam", "email": "dangeron@gmail.com" } ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Zamzam\\Instagram\\": "src/"
+        }
+    }
+}
