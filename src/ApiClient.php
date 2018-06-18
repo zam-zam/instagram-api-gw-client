@@ -137,7 +137,7 @@ class ApiClient
     {
         try {
             $response = $this->guzzleClient->request('GET', $uriPath, $this->requestData);
-            return $response->getBody()->getContents();
+            return json_decode($response->getBody()->getContents(), true);
         } catch (RequestException $e) {
             // do nothing
         }
