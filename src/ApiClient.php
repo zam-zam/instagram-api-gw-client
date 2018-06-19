@@ -4,6 +4,7 @@ namespace Zamzam\Instagram;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
+use http\Env\Request;
 
 /**
 * 
@@ -14,6 +15,7 @@ class ApiClient
     const ENDPOINTS = [
         'users' => [
             'info' => 'users/%s',
+            'id' => 'users/%s/id',
             'feed' => 'users/%s/feed/%s',
             'search' => 'users/search/%s'
         ],
@@ -26,9 +28,9 @@ class ApiClient
             'search' => 'tags/search/%s'
         ],
         'media' => [
-            'info' => '/media/%s',
-            'comments' => '/media/%s/comments',
-            'likers' => '/media/%s/likers'
+            'info' => 'media/%s',
+            'comments' => 'media/%s/comments',
+            'likers' => 'media/%s/likers'
         ]
     ];
 
@@ -41,7 +43,7 @@ class ApiClient
         $this->requestData = [
             'headers' => [
                 'Accept' => 'application/json',
-                'Content-type' => 'application/json',
+                'Content-Type' => 'application/json',
             ],
             'query' => [ 'api_token' => $api_token ]
         ];
@@ -52,6 +54,14 @@ class ApiClient
     {
         $uri_path = sprintf(
             self::ENDPOINTS['users']['info'],
+            $name);
+        return $this->makeRequest($uri_path);
+    }
+
+    public function getUserIdByName($name)
+    {
+        $uri_path = sprintf(
+            self::ENDPOINTS['users']['id'],
             $name);
         return $this->makeRequest($uri_path);
     }
@@ -74,7 +84,7 @@ class ApiClient
     }
 
     /* Places */
-    public function getPlaceFeed($placeId, $rankToken, $nextMaxId = null)
+    public function getPlaceFeed($placeId, $rankToken = null, $nextMaxId = null)
     {
         $uri_path = sprintf(
             self::ENDPOINTS['places']['feed'],
@@ -92,7 +102,7 @@ class ApiClient
     }
 
     /* Hashtags */
-    public function getTagFeed($hashtag, $rankToken, $nextMaxId = null)
+    public function getTagFeed($hashtag, $rankToken = null, $nextMaxId = null)
     {
         $uri_path = sprintf(
             self::ENDPOINTS['tags']['feed'],
