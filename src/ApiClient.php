@@ -15,7 +15,7 @@ class ApiClient
         'users' => [
             'info' => 'users/%s',
             'feed' => 'users/%s/feed/%s',
-            'search' => 'users/%s'
+            'search' => 'users/search/%s'
         ],
         'places' => [
             'feed' => 'places/%s/feed/%s',
