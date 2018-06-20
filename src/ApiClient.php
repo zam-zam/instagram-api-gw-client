@@ -26,9 +26,9 @@ class ApiClient
             'search' => 'tags/search/%s'
         ],
         'media' => [
-            'info' => '/media/%s',
-            'comments' => '/media/%s/comments',
-            'likers' => '/media/%s/likers'
+            'info' => 'media/%s',
+            'comments' => 'media/%s/comments',
+            'likers' => 'media/%s/likers'
         ]
     ];
 
