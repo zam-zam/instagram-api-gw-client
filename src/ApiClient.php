@@ -4,6 +4,7 @@ namespace Zamzam\Instagram;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\RequestException;
+use Zamzam\Instagram\Exceptions\NoDataException;
 
 /**
 * 
@@ -135,12 +136,11 @@ class ApiClient
 
     protected function makeRequest($uriPath)
     {
-        try {
-            $response = $this->guzzleClient->request('GET', $uriPath, $this->requestData);
-            return json_decode($response->getBody()->getContents(), true);
-        } catch (RequestException $e) {
-            // do nothing
+        $response = $this->guzzleClient->request('GET', $uriPath, $this->requestData);
+        if ($response->getStatusCode() !== 200) {
+            throw new NoDataException();
         }
+        return json_decode($response->getBody()->getContents(), true);
     }
 
 }
