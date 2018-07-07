@@ -14,6 +14,7 @@ class ApiClient
 
     const ENDPOINTS = [
         'users' => [
+            'id' => 'users/%s/id',
             'info' => 'users/%s',
             'feed' => 'users/%s/feed/%s',
             'search' => 'users/search/%s'
@@ -49,6 +50,14 @@ class ApiClient
     }
 
     /* Users */
+    public function getUserIdByName($name)
+    {
+        $uri_path = sprintf(
+            self::ENDPOINTS['users']['id'],
+            $name);
+        return $this->makeRequest($uri_path);
+    }
+
     public function getUserInfoByName($name)
     {
         $uri_path = sprintf(
