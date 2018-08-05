@@ -17,7 +17,9 @@ class ApiClient
             'id' => 'users/%s/id',
             'info' => 'users/%s',
             'feed' => 'users/%s/feed/%s',
-            'search' => 'users/search/%s'
+            'search' => 'users/search/%s',
+            'following' => 'users/%s/following',
+            'followers' => 'users/%s/followers'
         ],
         'places' => [
             'feed' => 'places/%s/feed/%s',
@@ -30,7 +32,8 @@ class ApiClient
         'media' => [
             'info' => 'media/%s',
             'comments' => 'media/%s/comments',
-            'likers' => 'media/%s/likers'
+            'likers' => 'media/%s/likers',
+            'popular' => 'media/explore/popular'
         ]
     ];
 
@@ -80,6 +83,22 @@ class ApiClient
         $uri_path = sprintf(
             self::ENDPOINTS['users']['search'],
             $queryString);
+        return $this->makeRequest($uri_path);
+    }
+
+    public function getFollowing($userId, $rankToken = null)
+    {
+        $uri_path = sprintf(
+            self::ENDPOINTS['users']['following'],
+            $userId);
+        return $this->makeRequest($uri_path);
+    }
+
+    public function getFollowers($userId, $rankToken = null)
+    {
+        $uri_path = sprintf(
+            self::ENDPOINTS['users']['followers'],
+            $userId);
         return $this->makeRequest($uri_path);
     }
 
@@ -140,6 +159,13 @@ class ApiClient
         $uri_path = sprintf(
             self::ENDPOINTS['media']['likers'],
             $mediaId);
+        return $this->makeRequest($uri_path);
+    }
+
+    public function getPopularMedia()
+    {
+        $uri_path = sprintf(
+            self::ENDPOINTS['media']['popular']);
         return $this->makeRequest($uri_path);
     }
 
