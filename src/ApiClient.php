@@ -33,7 +33,7 @@ class ApiClient
             'info' => 'media/%s',
             'comments' => 'media/%s/comments',
             'likers' => 'media/%s/likers',
-            'popular' => 'media/explore/popular'
+            'popular' => 'media/explore/popular/%s'
         ]
     ];
 
@@ -162,10 +162,11 @@ class ApiClient
         return $this->makeRequest($uri_path);
     }
 
-    public function getPopularMedia()
+    public function getPopularMedia($nextMaxId = null)
     {
         $uri_path = sprintf(
-            self::ENDPOINTS['media']['popular']);
+            self::ENDPOINTS['media']['popular'],
+            $nextMaxId);
         return $this->makeRequest($uri_path);
     }
 
