@@ -175,7 +175,7 @@ class ApiClient
         if ($response->getStatusCode() !== 200) {
             throw new NoDataException();
         }
-        return json_decode($response->getBody()->getContents(), true);
+        return json_decode($response->getBody()->getContents(), false);
     }
 
 }
