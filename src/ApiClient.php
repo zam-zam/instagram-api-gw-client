@@ -17,6 +17,7 @@ class ApiClient
             'id' => 'users/%s/id',
             'info' => 'users/%s',
             'feed' => 'users/%s/feed/%s',
+            'stories' => 'users/%s/stories',
             'search' => 'users/search/%s'
         ],
         'places' => [
@@ -72,6 +73,14 @@ class ApiClient
             self::ENDPOINTS['users']['feed'],
             $userId,
             $nextMaxId);
+        return $this->makeRequest($uri_path);
+    }
+
+    public function getUserStories($userId)
+    {
+        $uri_path = sprintf(
+            self::ENDPOINTS['users']['stories'],
+            $userId);
         return $this->makeRequest($uri_path);
     }
 
