@@ -104,7 +104,7 @@ class ApiClient
     public function getPlaceByCoordinates($latitude, $longitude)
     {
         $uri_path = sprintf(
-            self::ENDPOINTS['getBody']['search'],
+            self::ENDPOINTS['places']['search'],
             $latitude,
             $longitude);
         return $this->makeRequest($uri_path);
